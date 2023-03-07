@@ -10,8 +10,6 @@ public class Main {
             Server server = new Server();
             Client client = new Client(new Socket("localhost", 9000), "Petr");
             Client client1 = new Client(new Socket("localhost", 9000), "Alexandr");
-            server.joinChat(client.socket);
-            server.joinChat(client1.socket);
         } catch (Exception ex) {
 
         }

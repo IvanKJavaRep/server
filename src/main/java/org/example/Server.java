@@ -15,27 +15,25 @@ public class Server {
 
     }
 
-    public void joinChat(Socket socket) {
+    public void joinChat() {
+
         try {
-            InputStream inputStream = socket.getInputStream();
+            Socket client = serverSocket.accept();
+            InputStream inputStream = client.getInputStream();
             BufferedReader br =
                     new BufferedReader(new InputStreamReader(inputStream));
             String data = br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        for (var client :
-                clients) {
-            InputStream inputStream = null;
-            try {
-                inputStream = client.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            System.out.println(data);
+            for (var cl :
+                    clients) {
+                InputStream inputStream1 = null;
+                inputStream1 = cl.getInputStream();
+                BufferedReader br1 = new BufferedReader(new InputStreamReader(inputStream1));
             }
-
+            clients.add(client);
+        } catch (Exception ex) {
         }
-        clients.add(socket);
+
         System.out.println("Client added");
     }
 
